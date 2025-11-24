@@ -32,32 +32,36 @@ export class CarForm {
       if (reservation) {
         this.reservationForm.patchValue({
           checkInDate: reservation.checkInDate,
-          checkOutDate:reservation.checkOutDate,
-          clientName:reservation.clientName,
-          clientEmail:reservation.clientEmail,
-          carModel:reservation.carModel,
-          carNumber:reservation.carNumber
+          checkOutDate: reservation.checkOutDate,
+          clientName: reservation.clientName,
+          clientEmail: reservation.clientEmail,
+          carModel: reservation.carModel,
+          carNumber: reservation.carNumber
         });
       }
     }
   }
 
   onSubmit() {
-    
-    const data = { ...this.reservationForm.value, id: Date.now() };
-    
+
+
     const reservationID = this.activatedRoute.snapshot.paramMap.get('id');
-    
+
     if (reservationID) {
       const reservation = this.carService.getReservationById(+reservationID);
-      if(reservation){
-        this.carService.updatedReservation(reservation)
- }
-          }
-        }
-  
-    this.carService.addReservaion(data);
-    this.reservationForm.reset();
-    this.router.navigate(['/list']);
+      if (reservation) {
+        this.carService.updateReservation(+reservationID, {...this.reservationForm.value,id:+reservationID})
+
+      }
+      this.router.navigate(['/list']);
+    } else {
+      const data = { ...this.reservationForm.value, id: Date.now() };
+
+      this.carService.addReservaion(data);
+      this.reservationForm.reset();
+
+    }
+
+
   }
 }
