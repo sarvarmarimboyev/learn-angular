@@ -7,5 +7,10 @@ import { Component, Input } from '@angular/core';
 })
 export class UserComponent {
   @Input() name :string='';
-
+  @Input() users[]:IUser =[];
+}
+interface IUser{
+name:string;
+age:number;
+id:number;
 }
