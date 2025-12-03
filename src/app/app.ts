@@ -1,12 +1,13 @@
-
 import { Component } from '@angular/core';
+import { UserComponent } from './user/user';
 
 @Component({
-selector:'app-root',
-templateUrl:'./app.html',
-imports: [],
-
+  selector: 'app-root',
+  standalone: true,
+  imports: [UserComponent],
+  template: `
+  <section>
+    <app-user name="Sarvar Marimboyev"></app-user>
+  </section>`
 })
-export class App {
-    protected title = 'angular-course';
-}
+export class App {}
